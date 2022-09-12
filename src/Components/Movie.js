@@ -28,6 +28,16 @@ function Movie(props) {
     const url = `https://api.themoviedb.org/3/search/movie?api_key=291c267c5e08453f902d2059428d0d01&language=en-US&page=1&include_adult=false&query=${props.input}`;
     let imgUrl = "https://image.tmdb.org/t/p/original";
 
+    function chooseSimilarMovie(index){
+        if(similarMovies[index] == null){
+            console.log("do nthing")
+        }else{
+            let Array=[];
+            Array.push(similarMovies[index]);
+            setMovie(Array);
+        }
+    }
+
     function addToFav(id, title, poster_path, overview) {
         if (!favArray.includes(id)) {
             let myobj = {
@@ -66,6 +76,8 @@ function Movie(props) {
     }, [props.input])
     useEffect(() => {
         setTimeout(() => {
+            console.log("picURL");
+            console.log(movie);
             let picsUrl = `https://api.themoviedb.org/3/movie/${movie[0].id}/similar?api_key=291c267c5e08453f902d2059428d0d01&language=en-US&page=1`;
             let keyWordsUrl = `https://api.themoviedb.org/3/movie/238/keywords?api_key=291c267c5e08453f902d2059428d0d01`
             fetchBooks(picsUrl, setSimilarMovies);
@@ -171,12 +183,7 @@ function Movie(props) {
                                     <div className='image-container d-flex justify-content-start m-1'>
                                         <img className="img-fluid rounded float-left " variant="bottom"
                                              onClick={()=>{
-                                                 if(similarMovies[0] == null){
-                                                     console.log("do nthing")
-                                                 }else{
-                                                    setMovie(similarMovies[0]);
-                                                 }
-
+                                                 chooseSimilarMovie(0);
                                              }}
                                              src={similarMovies[0] == null ? "https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" : imgUrl + "/" + similarMovies[0].poster_path}/>
                                     </div>
@@ -185,6 +192,9 @@ function Movie(props) {
                                 <Col>
                                     <div className='image-container d-flex justify-content-start m-1'>
                                         <img className="img-fluid rounded float-left " variant="bottom"
+                                             onClick={()=>{
+                                                 chooseSimilarMovie(1);
+                                             }}
                                              src={similarMovies[0] == null ? "https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" : imgUrl + "/" + similarMovies[1].poster_path}/>
                                     </div>
                                 </Col>
@@ -193,12 +203,18 @@ function Movie(props) {
                                 <Col>
                                     <div className='image-container d-flex justify-content-start m-1'>
                                         <img className="img-fluid rounded float-left " variant="bottom"
+                                             onClick={()=>{
+                                                 chooseSimilarMovie(2);
+                                             }}
                                              src={similarMovies[0] == null ? "https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" : imgUrl + "/" + similarMovies[2].poster_path}/>
                                     </div>
                                 </Col>
                                 <Col>
                                     <div className='image-container d-flex justify-content-start m-1'>
                                         <img className="img-fluid rounded float-left " variant="bottom"
+                                             onClick={()=>{
+                                                 chooseSimilarMovie(3);
+                                             }}
                                              src={similarMovies[0] == null ? "https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" : imgUrl + "/" + similarMovies[3].poster_path}/>
                                     </div>
                                 </Col>
@@ -207,12 +223,18 @@ function Movie(props) {
                                 <Col>
                                     <div className='image-container d-flex justify-content-start m-1'>
                                         <img className="img-fluid rounded float-left " variant="bottom"
+                                             onClick={()=>{
+                                                 chooseSimilarMovie(4);
+                                             }}
                                              src={similarMovies[0] == null ? "https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" : imgUrl + "/" + similarMovies[4].poster_path}/>
                                     </div>
                                 </Col>
                                 <Col>
                                     <div className='image-container d-flex justify-content-start m-1'>
                                         <img className="img-fluid rounded float-left " variant="bottom"
+                                             onClick={()=>{
+                                                 chooseSimilarMovie(5);
+                                             }}
                                              src={similarMovies[0] == null ? "https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" : imgUrl + "/" + similarMovies[5].poster_path}/>
                                     </div>
                                 </Col>
