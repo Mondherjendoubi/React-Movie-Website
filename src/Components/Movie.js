@@ -23,8 +23,27 @@ function Movie(props) {
     const [movie, setMovie] = useState([]);
     const [similarMovies, setSimilarMovies] = useState([]);
     const [keyWords, setKeyWords] = useState([]);
+    const [favourites, setFavourites] = useState([]);
+    const [favArray, setFavArray] = useState([]);
     const url = `https://api.themoviedb.org/3/search/movie?api_key=291c267c5e08453f902d2059428d0d01&language=en-US&page=1&include_adult=false&query=${props.input}`;
     let imgUrl = "https://image.tmdb.org/t/p/original";
+
+    function addToFav(id, title, poster_path, overview) {
+        if (!favArray.includes(id)) {
+            let myobj = {
+                title: title,
+                imgsrc: poster_path,
+                description: overview
+            }
+            setFavArray([...favArray, id])
+            console.log(favArray)
+            const newFavouriteList = [...favourites, myobj];
+            setFavourites(newFavouriteList);
+            localStorage.setItem("react bruv", JSON.stringify(newFavouriteList))
+            console.log(window.localStorage.getItem("react bruv"));
+        }
+    }
+
     const fetchBooks = ((Url, callBack) => {
         console.log("entered");
         fetch(Url)
@@ -43,6 +62,7 @@ function Movie(props) {
     });
     useEffect(() => {
         fetchBooks(url, setMovie);
+        setFavourites(JSON.parse(window.localStorage.getItem("react bruv")));
     }, [props.input])
     useEffect(() => {
         setTimeout(() => {
@@ -55,6 +75,7 @@ function Movie(props) {
             console.log("keys");
             console.log(keyWords);
         }, 10);
+        setFavourites(JSON.parse(window.localStorage.getItem("react bruv")));
     }, [movie,props.input])
     return (
         <div>
@@ -69,7 +90,10 @@ function Movie(props) {
                                              src={movie[0] == null ? "nothing" : imgUrl + "/" + movie[0].poster_path}/>
                                     </div>
                                     <div className="d-grid gap-2">
-                                        <Button className="button-85" size="lg">
+                                        <Button div onClick={()=>{
+                                            addToFav(movie[0].id, movie[0].title, movie[0].poster_path, movie[0].overview)
+                                        }}
+                                            className="button-85" size="lg">
                                             Add to Favorites
                                         </Button>
                                     </div>

@@ -11,7 +11,7 @@ import Movie from "./Movie";
 
 function Home() {
     const [input, setInput] = useState('Lord of the Rings');
-    let searchValue="";
+    let searchValue = "";
     const ref = useRef(null);
     const printValues = e => {
         e.preventDefault();
@@ -21,9 +21,10 @@ function Home() {
         setInput(searchValue);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("input changed")
-    },[input])
+    }, [input])
+
     return (
         <div>
             <HomeNavigation/>
@@ -34,12 +35,12 @@ function Home() {
                     placeholder="Search Movie"
                     className="input-search me-2 bg-dark text-light"
                     aria-label="Search"
-                    onChange={event => searchValue=event.target.value}
+                    onChange={event => searchValue = event.target.value}
 
                 />
                 <Button className="button-85" onClick={printValues}>Search</Button>
             </Form>
-           <Movie input={input} setInput={setInput} />
+            <Movie input={input} setInput={setInput}/>
         </div>
 
     )
