@@ -8,7 +8,7 @@ function NavigationBar() {
     return (
         <Navbar bg="light" expand="lg">
             <Container fluid>
-                <Navbar.Brand href="#">Movies Website</Navbar.Brand>
+                <Navbar.Brand href="/home">Movies Website</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav

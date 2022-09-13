@@ -58,14 +58,28 @@
 }
 
 h1 {
-    font-family: 'Courier New', monospace;
     color: greenyellow;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 64px;
+    margin: 0 0 0;
+    padding: 20px 30px;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 
 h3 {
-    font-family: 'Courier New', monospace;
     color: greenyellow;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 64px;
+    margin: 0 0 0;
+    padding: 20px 30px;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 
@@ -92,7 +106,9 @@ h3 {
     -webkit-user-select: none;
     touch-action: manipulation;
 }
-
+h7{
+    color: #48ff00;
+}
 .button-85:before {
     content: "";
     background: linear-gradient(
@@ -158,7 +174,7 @@ h3 {
     display: inline-block;
     flex-direction: row;
     flex-shrink: 0;
-    font-family: Eina01,sans-serif;
+    font-family: Eina01, sans-serif;
     font-size: 16px;
     font-weight: 800;
     justify-content: center;
@@ -254,3 +270,59 @@ h3 {
     cursor: default;
     opacity: .24;
 }
+
+
+body {
+    background: #000;
+    font-family: 'Open Sans', Arial, Helvetica, Sans-serif, Verdana, Tahoma;
+}
+
+ul { list-style-type: none; }
+
+a {
+    color: #b63b4d;
+    text-decoration: none;
+}
+
+
+.accordion {
+    background: #f80000;
+    color: #48ff00;
+}
+
+.accordion-item{
+    width: 100%;
+    max-width: 300px;
+    margin: 30px auto 20px;
+    background: #090000;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 0px;
+    color: greenyellow;
+}
+
+.accordion-header{
+    width: 100%;
+    max-width: 100px;
+    margin: 30px auto 20px;
+    background: #06ff4d;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 0px;
+    color: greenyellow;
+}
+.accordion-button:not(.collapsed) {
+    color: #0c63e4;
+    background-color: #FEB7EE;
+}
+.accordion-body{
+    width: 100%;
+    max-width: 384px;
+    margin: 30px auto 20px;
+    background: #090000;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 0px;
+    color: greenyellow;
+}
+

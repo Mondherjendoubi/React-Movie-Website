@@ -12,21 +12,24 @@ import {
     FormControl,
     Container,
     Card,
-    ListGroup
+    ListGroup,Carousel,Accordion
 } from 'react-bootstrap';
 import BooksCollection from "./BooksCollection";
 import Book from "./Book";
 import HomeNavigation from "./HomeNavigation";
 import fetchBooks from "./Home"
+import ReviewAccordion from "./ReviewAccordion";
 
 function Movie(props) {
     const [movie, setMovie] = useState([]);
     const [similarMovies, setSimilarMovies] = useState([]);
     const [keyWords, setKeyWords] = useState([]);
+    const [movieVideos, setMovieVideos] = useState([]);
     const [favourites, setFavourites] = useState([]);
     const [favArray, setFavArray] = useState([]);
     const url = `https://api.themoviedb.org/3/search/movie?api_key=291c267c5e08453f902d2059428d0d01&language=en-US&page=1&include_adult=false&query=${props.input}`;
     let imgUrl = "https://image.tmdb.org/t/p/original";
+    let youtubeURl="https://www.youtube.com/embed/";
 
     function chooseSimilarMovie(index){
         if(similarMovies[index] == null){
@@ -60,6 +63,7 @@ function Movie(props) {
             .then((response) => response.json())
             .then((data) => {
                 if (data) {
+                    console.log(Url);
                     callBack(data.results);
                     console.log(data.results);
                 }
@@ -79,13 +83,17 @@ function Movie(props) {
             console.log("picURL");
             console.log(movie);
             let picsUrl = `https://api.themoviedb.org/3/movie/${movie[0].id}/similar?api_key=291c267c5e08453f902d2059428d0d01&language=en-US&page=1`;
-            let keyWordsUrl = `https://api.themoviedb.org/3/movie/238/keywords?api_key=291c267c5e08453f902d2059428d0d01`
+            let keyWordsUrl = `https://api.themoviedb.org/3/movie/${movie[0].id}/keywords?api_key=291c267c5e08453f902d2059428d0d01`
+            let videoUrl=`https://api.themoviedb.org/3/movie/${movie[0].id}/videos?api_key=291c267c5e08453f902d2059428d0d01&language=en-US`;
             fetchBooks(picsUrl, setSimilarMovies);
             fetchBooks(keyWordsUrl, setKeyWords);
+            fetchBooks(videoUrl, setMovieVideos);
             console.log("SimilarMovies");
             console.log(similarMovies);
             console.log("keys");
             console.log(keyWords);
+            console.log("videos");
+            console.log(movieVideos);
         }, 10);
         setFavourites(JSON.parse(window.localStorage.getItem("react bruv")));
     }, [movie,props.input])
@@ -115,7 +123,7 @@ function Movie(props) {
                     </Col>
                     <Col>
                         <div className="title ">
-                            <h1 className=" text-center  ">
+                            <h1 className=" text-center m-3 ">
                                 {movie[0] == null ? "empty" : movie[0].title}
                             </h1>
                             <div className=" d-flex flex-row">
@@ -170,14 +178,19 @@ function Movie(props) {
 
                             <div className="summary"></div>
                             <div className="summarytitle ">
-                                <h3 className="text-center ">Plot summary</h3>
+                                <h3 className="text-center m-3">Plot summary</h3>
                                 <h8>{movie[0] == null ? "empty" : movie[0].overview}</h8>
+                            </div>
+                            <h3>Trailer</h3>
+                            <div className="ratio ratio-16x9 mb-3">
+                                <iframe className="embed-responsive-item" src={movieVideos[0]== null ? "nothing" : youtubeURl+ movieVideos[0].key}
+                                        allowFullScreen></iframe>
                             </div>
                         </div>
                     </Col>
                     <Col>
                         <Container>
-                            <h3 className="text-center ">Similar Movies</h3>
+                            <h3 className="text-center m-2 ">Similar Movies</h3>
                             <Row className="m-1">
                                 <Col>
                                     <div className='image-container d-flex justify-content-start m-1'>
@@ -239,16 +252,11 @@ function Movie(props) {
                                     </div>
                                 </Col>
                             </Row>
-
-
                         </Container>
                     </Col>
                 </Row>
-
             </Container>
         </div>
-
-
     );
 }
 
